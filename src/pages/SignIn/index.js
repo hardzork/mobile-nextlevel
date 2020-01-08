@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, { Path } from 'react-native-svg';
+import { LoginButton } from 'react-native-fbsdk';
 
 import homeBackground from '../../assets/images/homeBackground.png';
 // import logo from '../../assets/images/Logo.png';
@@ -158,7 +159,18 @@ export default function SignIn() {
             LOGIN
           </Text>
         </View>
-
+        <LoginButton
+          permissions={['public_profile']}
+          onLoginFinished={(error, result) => {
+            if (error) {
+              console.log('falha na autenticação: ', error);
+            } else if (result.isCancelled) {
+              console.log('cancelado pelo usuário');
+            } else {
+              console.log('result: ', result);
+            }
+          }}
+        />
         <View
           style={{
             backgroundColor: '#e7e7e7',
