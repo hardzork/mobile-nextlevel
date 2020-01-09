@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, { Path } from 'react-native-svg';
-import { LoginButton } from 'react-native-fbsdk';
+import { LoginButton, AccessToken } from 'react-native-fbsdk';
 
 import homeBackground from '../../assets/images/homeBackground.png';
 // import logo from '../../assets/images/Logo.png';
@@ -23,10 +23,6 @@ export default function SignIn() {
       style={{ width: '110%', height: '100%' }}
     >
       <SafeAreaView>
-        {/* <Image
-          style={{ width: 122, height: 132, marginTop: 52, marginLeft: 27 }}
-          source={logo}
-        /> */}
         <View
           style={{ width: 122, height: 132, marginTop: 52, marginLeft: 33 }}
         >
@@ -159,18 +155,30 @@ export default function SignIn() {
             LOGIN
           </Text>
         </View>
-        <LoginButton
-          permissions={['public_profile']}
-          onLoginFinished={(error, result) => {
-            if (error) {
-              console.log('falha na autenticação: ', error);
-            } else if (result.isCancelled) {
-              console.log('cancelado pelo usuário');
-            } else {
-              console.log('result: ', result);
-            }
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 2,
+            top: 50,
+            width,
           }}
-        />
+        >
+          <LoginButton
+            style={{ width: 300, height: 60 }}
+            permissions={['public_profile']}
+            onLoginFinished={(error, result) => {
+              if (error) {
+                console.log('falha na autenticação: ', error);
+              } else if (result.isCancelled) {
+                console.log('cancelado pelo usuário');
+              } else {
+                console.log('result: ', result);
+              }
+            }}
+          />
+        </View>
         <View
           style={{
             backgroundColor: '#e7e7e7',
